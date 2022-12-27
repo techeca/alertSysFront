@@ -11,22 +11,24 @@ export default function useAuth(){
   let actualPath = useLocation().pathname
 
   const authCheck = useCallback((url) => {
-  const publicPaths = ['/' ,'/login', '/status']
-    console.log(userService.userValue);
+  const publicPaths = ['/' ,'/Login', '/Status']
+    //console.log(userService.userValue);
    if(!Boolean(userService.userValue) && !Boolean(publicPaths.includes(url.toLowerCase()))) {
       //No logged & no está en ruta publica
-      navigate('/login', {replace: true});
+      navigate('/Login', {replace: true});
       setAuthorized(false)
       setIsLogged(false)
     } else {
-
       if(Boolean(userService.userValue)){
         //navigate('/Home', {replace: true})
         setIsLogged(true)
-        if(actualPath === '/'){
+        if(actualPath === '/' || actualPath === '/Login'){
           navigate('/Home')
         }
       }else {
+        if(actualPath === '/'){
+          navigate('/Login')
+        }
         //navigate('/login', {replace: true});
       }
       setAuthorized(true)
