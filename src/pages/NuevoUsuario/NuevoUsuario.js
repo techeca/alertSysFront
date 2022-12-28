@@ -26,10 +26,15 @@ export default function NuevoUsuario(){
           <Input name='nombre' type='text' onchange={formik.handleChange} value={formik.values.nombre} />
           <Input name='rut' type='text' onchange={formik.handleChange} value={formik.values.rut} />
 
-          <div className='flex w-full'>
+          <div className='flex flex-cols-3'>
           <Input name='password' type='password' onchange={formik.handleChange} value={formik.values.password} />
           <Input name='re-password' type='password' onchange={formik.handleChange} value={formik.values.repassword} />
-
+          <div className='flex'>
+            <div className={'h-5 w-10 bg-red-400'}></div>
+            <div className={'h-5 w-10 bg-orange-300'}></div>
+            <div className={'h-5 w-10 bg-yellow-300'}></div>
+            <div className={'h-5 w-10 bg-green-400'}></div>
+          </div>
           </div>
 
           <Input name='email' type='text' onchange={formik.handleChange} value={formik.values.email} />
