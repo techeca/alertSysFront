@@ -5,26 +5,27 @@ import Button from '../../components/ui/Button.js'
 import Card from '../../components/ui/Card.js'
 import { useNavigate } from 'react-router-dom'
 import { userService } from '../../services'
+import { useRouter } from '../../hooks/useRouter.js'
 
 export default function Login(){
-  const navigate = useNavigate()
+  const router = useRouter()
   const formik = useFormik({
     initialValues: { email: '', password: '' },
     onSubmit: values => {
       console.log(values.email)
       console.log(values.password)
       //alert(values)
-      console.log('Enviando formulario');
     return userService.login(values.email, values.password)
       .then(r => {
-        console.log(`respuesta de API recibida: ${r}`);
-        navigate('/Home', {replace:true})
+        console.log(`respuesta de API:`);
+        console.log(r);
+        //navigate('/Home', {replace:true})
+        router.navigate('/Home', {replace: true})
       }).catch(err => {
         console.log(err);
       })
     }
   })
-  console.log('load login');
 
   return(
     <div className={'h-full w-full bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 flex justify-center items-center'}>

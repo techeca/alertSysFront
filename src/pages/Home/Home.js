@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Card from '../../components/ui/Card.js'
 import Button from '../../components/ui/Button.js'
 import Table from '../../components/ui/Table.js'
 import { Link, Outlet } from "react-router-dom";
+import ContextUser from '../../context/UserContext'
 
 export default function Home(){
+  const cntxt = useContext(ContextUser)
+  //let dash = cntxt.userData.getDashboard(cntxt.userData.userValue.name)
   const tableHeaders = ['Nombre', 'Cargo', 'Status', 'Acción']
   const tableData = [
     {nombre: 'Neil Sims', email:'neil.sims@email.com', cargo:'React Developer', estado:true},
     {nombre: 'Shrek', email:'shrek@email.com', cargo:'Backend Developer', estado:false}
   ]
+  //console.log(cntxt);
+  //console.log(cntxt.userData.getDashboard());
 
   return(
+    cntxt.userData ?
     <div className={'w-full'}>
 
       {/*Resumen en numeros*/}
@@ -26,7 +32,7 @@ export default function Home(){
               </svg>
               <p className={'text-gray-500'}>Requerimientos</p>
               {/*<Button text={'Ir'} type={'button'} bgColor={'blue-500'} hoverColor={'blue-400'} />*/}
-              <h1 className={`text-4xl text-indigo-600`}>54</h1>
+              <h1 className={`text-4xl text-indigo-600`}>{cntxt.userData.getDashboard(cntxt.userData.userValue.name).req}</h1>
             </div>
           </Card>
         </div>
@@ -39,7 +45,7 @@ export default function Home(){
               </svg>
               <p className={'text-gray-500'}>Usuarios</p>
               {/*<Button text={'Ir'} type={'button'} bgColor={'blue-500'} hoverColor={'blue-400'} />*/}
-              <h1 className={`text-4xl text-indigo-600`}>11</h1>
+              <h1 className={`text-4xl text-indigo-600`}>{cntxt.userData.getDashboard(cntxt.userData.userValue.name).users}</h1>
             </div>
           </Card>
         </div>
@@ -52,7 +58,7 @@ export default function Home(){
               </svg>
               <p className={'text-gray-500'}>Zonas</p>
               {/*<Button text={'Ir'} type={'button'} bgColor={'blue-500'} hoverColor={'blue-400'} />*/}
-              <h1 className={`text-4xl text-indigo-600`}>30</h1>
+              <h1 className={`text-4xl text-indigo-600`}>{cntxt.userData.getDashboard(cntxt.userData.userValue.name).zonas}</h1>
             </div>
           </Card>
         </div>
@@ -121,5 +127,7 @@ export default function Home(){
       </div>*/}
 
     </div>
+    :
+    <></>
   )
 }

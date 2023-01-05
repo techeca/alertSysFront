@@ -27,7 +27,7 @@ export default function Input({name, type, onchange, value}){
         :
         <></>
       }
-      <input className={`border m-3 p-1.5 ${type !== 'text' ? 'pl-10' : 'pl-3 w-[100%]'} rounded-md outline-none`} id={name} name={name} type={name} placeholder={firstLetterCapitalize} onChange={onchange} value={value} />
+      <input className={`border m-3 p-1.5 ${type !== 'text' ? 'pl-10' : 'pl-3 w-[100%]'} rounded-md outline-none`} id={name} name={name} type={type} placeholder={firstLetterCapitalize} onChange={onchange} value={value} />
     </div>
   )
 }

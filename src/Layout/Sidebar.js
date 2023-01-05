@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { ContextUser } from '../context/UserContext.js'
 
 export default function Sidebar(){
-  console.log('load sidebar');
+  const cntxt = useContext(ContextUser)
 
   return(
+    cntxt.userData ?
     <aside className={`w-80 top-[5.3%]`}>
        <div className="h-full w-80 fixed overflow-y-auto py-4 px-3 bg-gray-50 bg-indigo-900">
           <ul className="space-y-2">
@@ -22,13 +24,15 @@ export default function Sidebar(){
             </li>
             {/*requerimientos*/}
             <li>
-                <a href="#" className="flex items-center p-2 text-white font-normal rounded-lg hover:bg-indigo-700">
+              <Link to={'/MisRequerimientos'}>
+                <p href="#" className="flex items-center p-2 text-white font-normal rounded-lg hover:bg-indigo-700">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 flex-shrink-0 transition duration-75 text-white">
                      <path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
                    </svg>
                    <span className="flex-1 ml-3 whitespace-nowrap">Requerimientos</span>
                    {/*<span className="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span>*/}
-                </a>
+                </p>
+              </Link>
             </li>
             {/*gestion de usuarios*/}
             <li>
@@ -59,7 +63,7 @@ export default function Sidebar(){
             <li>
                 <Link to={`/GestionZonas`}>
                 <p className="flex items-center p-2 font-normal rounded-lg text-white hover:bg-indigo-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 flex-shrink-0 transition duration-75 text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 flex-shrink-0 transition duration-75 text-white">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
                   </svg>
 
@@ -71,5 +75,7 @@ export default function Sidebar(){
           </ul>
        </div>
     </aside>
+    :
+    <></>
   )
 }

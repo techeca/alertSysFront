@@ -1,14 +1,15 @@
 import React from 'react'
 import Input from '../../components/form/Input.js'
 import Button from '../../components/ui/Button.js'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { adminService } from '../../services'
 
-export default function NuevaZona(){
+export default function EditarZona(){
+  let params = useParams()
 
   const formik = useFormik({
-    initialValues: { nombre: '', descripcion:'' },
+    initialValues: { nombre: `${params.zonaID}`, descripcion:`${params.zonaDesc.replaceAll('-', ' ')}` },
     onSubmit: values => {
       adminService.newZone(values.nombre, values.descripcion)
       .then(resp => {
@@ -20,11 +21,13 @@ export default function NuevaZona(){
   })
 
   //{name, type, onchange, value}
+  console.log('editar zona');
+  console.log(params);
 
   return(
     <div className={`w-full bg-white`}>
-      <div className={'w-full md:p-6'}>
-        <h1 className={`text-xl text-gray-900 font-semibold mb-6`}>Agregar Nueva Zona</h1>
+      <div className={'w-full p-6'}>
+        <h1 className={`text-xl text-gray-900 font-semibold mb-6`}>Editar Zona</h1>
 
           <form className={'flex flex-wrap bg-white rounded-md border p-3'} onSubmit={formik.handleSubmit}>
           <Input name='nombre' type='text' onchange={formik.handleChange} value={formik.values.nombre} />
@@ -45,10 +48,6 @@ export default function NuevaZona(){
 
           </div>
           </form>
-
-
-
-
 
       </div>
     </div>

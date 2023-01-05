@@ -10,6 +10,12 @@ import GestionRequerimientos from '../pages/GestionRequerimientos'
 import NuevoUsuario from '../pages/NuevoUsuario'
 import NuevaZona from '../pages/NuevaZona'
 import NuevoRequerimiento from '../pages/NuevoRequerimiento'
+import MisRequerimientos from '../pages/MisRequerimientos'
+import EditarZona from '../pages/EditarZona'
+import EditarUsuario from '../pages/EditarUsuario'
+import ListaZona from '../pages/ListaZonas'
+import ListaUsuarios from '../pages/ListaUsuarios'
+import ListaRequerimientos from '../pages/ListaRequerimientos'
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,12 +23,24 @@ export const router = createBrowserRouter(
       <Route path="Login" element={<Login />} />
       <Route path="Status" element={<Status />} />
       <Route path="Home" element={<Home />} />
-      <Route path="GestionUsuarios" element={<GestionUsuarios />} />
-      <Route path="GestionUsuarios/NuevoUsuario" element={<NuevoUsuario />} />
-      <Route path="GestionZonas" element={<GestionZonas />} />
-      <Route path="GestionZonas/NuevaZona" element={<NuevaZona />} />
-      <Route path="GestionRequerimientos" element={<GestionRequerimientos />} />
-      <Route path="GestionRequerimientos/NuevoRequerimiento" element={<NuevoRequerimiento />} />
+      <Route path="MisRequerimientos" element={<MisRequerimientos />} />
+
+      <Route path="GestionUsuarios" element={<GestionUsuarios />} >
+        <Route index element={<ListaUsuarios />} />
+        <Route path=":usuarioEmail" element={<EditarUsuario/>} />
+        <Route path="NuevoUsuario" element={<NuevoUsuario />} />
+      </Route>
+
+      <Route path="GestionZonas" element={<GestionZonas />} >
+        <Route index element={<ListaZona />} />
+        <Route path=":zonaID/:zonaDesc" element={<EditarZona />} />
+        <Route path="NuevaZona" element={<NuevaZona />} />
+      </Route>
+
+      <Route path="GestionRequerimientos" element={<GestionRequerimientos />} >
+        <Route index element={<ListaRequerimientos />} />
+        <Route path="NuevoRequerimiento" element={<NuevoRequerimiento />} />
+      </Route>
     </Route>
   )
 )

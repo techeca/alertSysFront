@@ -29,9 +29,6 @@ function post(url, body){
 }
 
 function postSn(url, body){
-  console.log('configurando opciones de encabezado');
-  console.log(url);
-  console.log(body);
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -41,7 +38,7 @@ function postSn(url, body){
 }
 
 function authHeader(url){
-  const user = userService.userService;
+  const user = userService.userValue;
   const isLoggenIn = user && user.token;
   const isAPIUrl = url.startsWith(BACKEND_DATA.DEVELOPMENT);
   if(isLoggenIn && isAPIUrl){
@@ -53,7 +50,6 @@ function authHeader(url){
 
 function handleResponse(response){
   return response.text().then(text => {
-    console.log(`Data solicitud a API: ${text}`);
     const data = text && JSON.parse(text);
     if(!response.ok){
       if([401, 403].includes(response.status) && userService.userService){
